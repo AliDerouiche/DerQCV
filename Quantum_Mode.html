@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logob.ico">
+<title>DerQCV-Quantum Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .logo img {
+  height: 69px; /* Taille du logo */
+  width: auto; /* Garde les proportions */
+  display: block;
+  }
+  :root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --tertiary-color: #192E54;
+    --accent-color: #64FFDA;
+    --hover-color: #52d8c0;
+    --text-color: #CCD6F6;
+    --card-bg: rgba(17, 34, 64, 0.7);
+    --border-color: #203A5B;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+    --warning-color: #FF9800;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header */
+  header {
+    padding: 0.2rem 2rem;
+    background: rgba(17, 34, 64, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--accent-color), #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+  }
+  
+  .card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .explanation {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .explanation h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .explanation p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .simulation-area {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .simulation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .simulation-title {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .simulation-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  button {
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border: none;
+    padding: 0.8rem 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: rgba(100, 255, 218, 0.2);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .toggle.active {
+    background: rgba(100, 255, 218, 0.5);
+  }
+  
+  .toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle.active .toggle-slider {
+    transform: translateX(30px);
+  }
+  
+  #photonContainer {
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    max-width: 800px;
+  }
+  
+  .photon {
+    width: 70px;
+    height: 100px;
+    border-radius: 12px;
+    background: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: default;
+    position: relative;
+    user-select: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .photon:hover {
+    transform: translateY(-5px);
+  }
+  
+  .photon-label {
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.7rem;
+    color: var(--accent-color);
+  }
+  
+  .photon-base {
+    position: absolute;
+    top: 5px;
+    font-size: 0.7rem;
+    color: var(--text-color);
+  }
+  
+  .photon.measured-correct {
+    border: 3px solid var(--success-color);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  }
+  
+  .photon.measured-wrong {
+    border: 3px solid var(--error-color);
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.5);
+  }
+  
+  .results-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .results-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .result-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .result-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #log {
+    background: var(--tertiary-color);
+    padding: 1rem;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    text-align: left;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  #log::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #log::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  #log::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.3);
+    border-radius: 4px;
+  }
+  
+  #log::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 255, 218, 0.5);
+  }
+  
+  .log-entry {
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0;
+  }
+  
+  .log-entry.correct {
+    color: var(--success-color);
+  }
+  
+  .log-entry.wrong {
+    color: var(--error-color);
+  }
+  
+  .log-entry.intercept {
+    color: var(--warning-color);
+  }
+  
+  #keyResult {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    padding: 1rem;
+    background: rgba(100, 255, 218, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+  
+  .error-chart {
+    margin-top: 1rem;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .error-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-color), var(--error-color));
+    width: 0%;
+    transition: width 1s ease;
+    position: relative;
+  }
+  
+  .error-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .error-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--text-color);
+    z-index: 1;
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+  }
+  
+  .legend-color.correct {
+    background: var(--success-color);
+  }
+  
+  .legend-color.wrong {
+    background: var(--error-color);
+  }
+  
+  .legend-color.intercept {
+    background: var(--warning-color);
+  }
+  
+  .quantum-states {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .quantum-state {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .quantum-state:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
+  }
+  
+  .state-visualization {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    position: relative;
+    background: rgba(100, 255, 218, 0.1);
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .state-line {
+    position: absolute;
+    width: 60px;
+    height: 2px;
+    background: var(--accent-color);
+    transform-origin: center;
+  }
+  
+  .state-name {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.3rem;
+  }
+  
+  .state-formula {
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+  
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-color);
+    max-width: 300px;
+  }
+  
+  .notification.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* Footer */
+  footer {
+    background: var(--secondary-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    main {
+      padding: 1rem;
+    }
+    
+    .card {
+      padding: 1.5rem;
+    }
+    
+    .simulation-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .photon {
+      width: 60px;
+      height: 90px;
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Site Logo">
+    <div class="logo-text">DerQCV</div>
+  </div>
+  <nav>
+    <a href="https://aliderouiche.github.io/DerQCV/Home.html">Home</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Mathematical_Mode.html">Mathematical Mode</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Quantum_Mode.html">Quantum Mode</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Comparison.html">Comparison</a>
+    <a href="https://aliderouiche.github.io/DerQCV/About.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>Quantum Mode</h1>
+    <p class="subtitle">Explore the BB84 Protocol and Quantum Security</p>
+  </div>
+  
+  <div class="explanation">
+    <h3><i class="fas fa-info-circle"></i> What is the BB84 Protocol?</h3>
+    <p>
+      The BB84 protocol is the first quantum key distribution protocol, invented in 1984 by Charles Bennett and Gilles Brassard. 
+      It allows two parties (Alice and Bob) to generate a shared secret key using quantum states.
+    </p>
+    <p>
+      The principle relies on the fact that measuring a quantum state disturbs that state. If an eavesdropper (Eve) attempts to intercept the communication, 
+      her presence will be detected by the disturbances she introduces.
+    </p>
+  </div>
+  
+  <div class="simulation-area">
+    <div class="simulation-header">
+      <div class="simulation-title">
+        <i class="fas fa-atom"></i> BB84 Protocol Simulation
+      </div>
+      <div class="simulation-controls">
+        <div class="toggle-container">
+          <span>Interception:</span>
+          <div class="toggle" id="interceptToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+        <button id="startBtn">
+          <i class="fas fa-play"></i> Start Simulation
+        </button>
+        <button id="resetBtn">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </div>
+    </div>
+    
+    <div id="photonContainer"></div>
+    
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color correct"></div>
+        <span>Correct Measurement</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color wrong"></div>
+        <span>Wrong Measurement</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color intercept"></div>
+        <span>Interception</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h3 style="color: var(--accent-color); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+      <i class="fas fa-atom"></i> Quantum States Visualization
+    </h3>
+    <div class="quantum-states">
+      <div class="quantum-state">
+        <div class="state-visualization">
+          <div class="state-line" style="transform: rotate(0deg);"></div>
+        </div>
+        <div class="state-name">State |0⟩</div>
+        <div class="state-formula">Horizontal Polarization</div>
+      </div>
+      <div class="quantum-state">
+        <div class="state-visualization">
+          <div class="state-line" style="transform: rotate(90deg);"></div>
+        </div>
+        <div class="state-name">State |1⟩</div>
+        <div class="state-formula">Vertical Polarization</div>
+      </div>
+      <div class="quantum-state">
+        <div class="state-visualization">
+          <div class="state-line" style="transform: rotate(45deg);"></div>
+        </div>
+        <div class="state-name">State |+⟩</div>
+        <div class="state-formula">Diagonal +45°</div>
+      </div>
+      <div class="quantum-state">
+        <div class="state-visualization">
+          <div class="state-line" style="transform: rotate(135deg);"></div>
+        </div>
+        <div class="state-name">State |-⟩</div>
+        <div class="state-formula">Diagonal -45°</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="results-container">
+    <div class="result-card">
+      <h3><i class="fas fa-terminal"></i> Simulation Log</h3>
+      <div id="log"></div>
+    </div>
+    
+    <div class="result-card">
+      <h3><i class="fas fa-key"></i> Results</h3>
+      <div id="keyResult"></div>
+      
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-value" id="correctCount">0</div>
+          <div class="stat-label">Correct Measurements</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="wrongCount">0</div>
+          <div class="stat-label">Wrong Measurements</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="keyLength">0</div>
+          <div class="stat-label">Key Bits</div>
+        </div>
+      </div>
+      
+      <div class="error-chart">
+        <div class="error-bar" id="errorBar"></div>
+        <div class="error-label" id="errorLabel">Error Rate: 0%</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Quantum Crypto Visualizer – All rights reserved</p>
+  </div>
+</footer>
+
+<div class="notification" id="notification"></div>
+
+<script>
+  // Polarization symbols:
+  // ↔ Horizontal (rectilinear basis)
+  // ↕ Vertical
+  // ↗ Diagonal +
+  // ↘ Diagonal -
+  const polarizations = ['↔', '↕', '↗', '↘'];
+  
+  // Possible measurement bases: rectilinear (0°), diagonal (45°)
+  // rectilinear = ↔ or ↕ ; diagonal = ↗ or ↘
+  const photonContainer = document.getElementById('photonContainer');
+  const startBtn = document.getElementById('startBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const interceptToggle = document.getElementById('interceptToggle');
+  const log = document.getElementById('log');
+  const keyResult = document.getElementById('keyResult');
+  const correctCount = document.getElementById('correctCount');
+  const wrongCount = document.getElementById('wrongCount');
+  const keyLength = document.getElementById('keyLength');
+  const errorBar = document.getElementById('errorBar');
+  const errorLabel = document.getElementById('errorLabel');
+  const notification = document.getElementById('notification');
+  
+  // Generate a random sequence of photons (fixed length)
+  const N = 12; // number of photons to simulate
+  let photons = [];
+  let emitterBases = []; // emission base (rectilinear=0, diagonal=1)
+  let emitterBits = []; // bits sent (0 or 1)
+  let receiverBases = []; // measurement base chosen by receiver
+  let measuredBits = []; // bits measured by receiver
+  let intercepted = false; // if interception is simulated
+  
+  function randomChoice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  
+  // Choose base from polarization
+  function baseFromPolar(polar) {
+    if (polar === '↔' || polar === '↕') return 0;
+    return 1;
+  }
+  
+  // Bit according to polarization
+  function bitFromPolar(polar) {
+    if (polar === '↔' || polar === '↗') return 0;
+    return 1;
+  }
+  
+  // Polarization from base + bit
+  function polarFromBaseBit(base, bit) {
+    if (base === 0) return bit === 0 ? '↔' : '↕';
+    else return bit === 0 ? '↗' : '↘';
+  }
+  
+  function baseName(base) {
+    return base === 0 ? 'Rectilinear' : 'Diagonal';
+  }
+  
+  function showNotification(message, duration = 3000) {
+    notification.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, duration);
+  }
+  
+  function initSimulation() {
+    photons = [];
+    emitterBases = [];
+    emitterBits = [];
+    receiverBases = [];
+    measuredBits = [];
+    intercepted = interceptToggle.classList.contains('active');
+    keyResult.textContent = '';
+    correctCount.textContent = '0';
+    wrongCount.textContent = '0';
+    keyLength.textContent = '0';
+    errorBar.style.width = '0%';
+    errorLabel.textContent = 'Error Rate: 0%';
+    log.innerHTML = '';
+    photonContainer.innerHTML = '';
+    
+    // Generate emitter sequence
+    for (let i = 0; i < N; i++) {
+      let base = Math.round(Math.random()); // 0 or 1
+      let bit = Math.round(Math.random());
+      emitterBases.push(base);
+      emitterBits.push(bit);
+      photons.push(polarFromBaseBit(base, bit));
+    }
+    
+    // Display photons (not measured)
+    photons.forEach((polar, i) => {
+      const div = document.createElement('div');
+      div.classList.add('photon');
+      div.innerHTML = `
+        <div class="photon-base">${baseName(emitterBases[i])}</div>
+        ${polar}
+        <div class="photon-label">Photon ${i+1}</div>
+      `;
+      div.id = `photon-${i}`;
+      photonContainer.appendChild(div);
+    });
+    
+    log.innerHTML += `<div class="log-entry">Initializing simulation with ${N} photons</div>`;
+    if (intercepted) {
+      log.innerHTML += `<div class="log-entry intercept">Interception mode enabled</div>`;
+    }
+    log.innerHTML += `<div class="log-entry">Starting transmission...</div>`;
+  }
+  
+  async function measurePhoton(i) {
+    // Choose receiver base randomly
+    let rBase = Math.round(Math.random());
+    receiverBases[i] = rBase;
+    const emitterBase = emitterBases[i];
+    const emitterBit = emitterBits[i];
+    const photonDiv = document.getElementById(`photon-${i}`);
+    
+    // Animate photon
+    photonDiv.style.transform = 'scale(1.1)';
+    await new Promise(r => setTimeout(r, 300));
+    
+    // If interception is simulated, modify polarization
+    if (intercepted) {
+      // "Measure" and re-emit photon with a different random base
+      let intruderBase = Math.round(Math.random());
+      let intruderBit = emitterBit; // keep the supposed bit
+      
+      // If bases are different, probability of error
+      if (intruderBase !== emitterBase) {
+        intruderBit = Math.round(Math.random());
+      }
+      
+      photons[i] = polarFromBaseBit(intruderBase, intruderBit);
+      photonDiv.innerHTML = `
+        <div class="photon-base">${baseName(intruderBase)}</div>
+        ${photons[i]}
+        <div class="photon-label">Photon ${i+1}</div>
+      `;
+      
+      log.innerHTML += `<div class="log-entry intercept">Intercepting photon ${i+1}: intruder base=${baseName(intruderBase)}, intruder bit=${intruderBit}</div>`;
+      
+      // Interception animation
+      photonDiv.style.borderColor = '#FF9800';
+      await new Promise(r => setTimeout(r, 500));
+    }
+    
+    // Measurement by receiver
+    if (rBase === emitterBase) {
+      measuredBits[i] = emitterBit;
+      photonDiv.classList.add('measured-correct');
+      log.innerHTML += `<div class="log-entry correct">Photon ${i+1} measured correctly (base=${baseName(rBase)}, bit=${emitterBit})</div>`;
+      correctCount.textContent = parseInt(correctCount.textContent) + 1;
+    } else {
+      // Measurement in wrong base → random bit
+      measuredBits[i] = Math.round(Math.random());
+      photonDiv.classList.add('measured-wrong');
+      log.innerHTML += `<div class="log-entry wrong">Photon ${i+1} measured incorrectly (base=${baseName(rBase)}, bit=${measuredBits[i]})</div>`;
+      wrongCount.textContent = parseInt(wrongCount.textContent) + 1;
+    }
+    
+    // Reset transformation
+    photonDiv.style.transform = '';
+    
+    // Scroll to photon
+    photonDiv.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  
+  function finalizeKey() {
+    // Key = bits measured only when bases match
+    let keyBits = [];
+    let correctMeasurements = 0;
+    
+    for (let i = 0; i < N; i++) {
+      if (emitterBases[i] === receiverBases[i]) {
+        keyBits.push(measuredBits[i]);
+        correctMeasurements++;
+      }
+    }
+    
+    const keyStr = keyBits.join('');
+    keyLength.textContent = keyBits.length;
+    
+    if (keyStr.length > 0) {
+      keyResult.innerHTML = `
+        <div>Shared Secret Key:</div>
+        <div style="font-size: 1.5rem; margin: 0.5rem 0; letter-spacing: 5px; font-family: monospace;">${keyStr}</div>
+        <div style="font-size: 0.9rem;">${keyBits.length} bits generated from ${correctMeasurements} correct measurements</div>
+      `;
+    } else {
+      keyResult.innerHTML = `<div>No base matches - key not generated</div>`;
+    }
+    
+    // Calculate and display error rate
+    const errorRate = N > 0 ? Math.round((parseInt(wrongCount.textContent) / N) * 100) : 0;
+    errorBar.style.width = `${errorRate}%`;
+    errorLabel.textContent = `Error Rate: ${errorRate}%`;
+    
+    // End notification
+    if (intercepted && errorRate > 20) {
+      showNotification("Interception detected! High error rate.", 5000);
+    } else if (keyStr.length > 0) {
+      showNotification(`Key generated successfully: ${keyStr.length} bits`, 3000);
+    } else {
+      showNotification("Failed to generate key", 3000);
+    }
+  }
+  
+  async function runSimulation() {
+    startBtn.disabled = true;
+    initSimulation();
+    
+    for (let i = 0; i < N; i++) {
+      await new Promise(r => setTimeout(r, 1500));
+      await measurePhoton(i);
+    }
+    
+    await new Promise(r => setTimeout(r, 1200));
+    finalizeKey();
+    startBtn.disabled = false;
+  }
+  
+  // Event handlers
+  startBtn.addEventListener('click', runSimulation);
+  
+  resetBtn.addEventListener('click', () => {
+    initSimulation();
+    showNotification("Simulation reset", 2000);
+  });
+  
+  interceptToggle.addEventListener('click', function() {
+    this.classList.toggle('active');
+    intercepted = this.classList.contains('active');
+    showNotification(`Interception ${intercepted ? 'enabled' : 'disabled'}`, 2000);
+  });
+  
+  // Initialize page
+  initSimulation();
+</script>
+</body>
+</html>
