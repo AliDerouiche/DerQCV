@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logob.ico">
+<title>DerQCV-About</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+  :root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --tertiary-color: #192E54;
+    --accent-color: #64FFDA;
+    --hover-color: #52d8c0;
+    --text-color: #CCD6F6;
+    --card-bg: rgba(17, 34, 64, 0.7);
+    --border-color: #203A5B;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* Header */
+  header {
+    padding: 0.2rem 2rem;
+    background: rgba(17, 34, 64, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeIn 1s ease;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--accent-color), #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+  }
+  
+  .intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+  
+  /* Sections */
+  .section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease forwards;
+    opacity: 0;
+  }
+  
+  .section:nth-child(2) { animation-delay: 0.2s; }
+  .section:nth-child(3) { animation-delay: 0.4s; }
+  .section:nth-child(4) { animation-delay: 0.6s; }
+  
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+  }
+  
+  .section-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  
+  .section-content p {
+    margin-bottom: 1rem;
+  }
+  
+  .section-content ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Founder Section */
+  .founder-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    align-items: center;
+  }
+  
+  .founder-avatar {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .founder-info {
+    flex: 1;
+  }
+  
+  .founder-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .founder-title {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .founder-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .founder-skills {
+    margin-top: 1.5rem;
+  }
+  
+  .skills-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+  
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .skill-tag {
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+  }
+  
+  .founder-social {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .founder-social a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .founder-social a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+  }
+  
+  /* Research Section */
+  .research-container {
+    margin-top: 2rem;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .research-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .research-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+  }
+  
+  .research-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  .research-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .research-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .research-link:hover {
+    color: var(--hover-color);
+    transform: translateY(-2px);
+  }
+  
+  /* Tech Stack */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .tech-item {
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
+  }
+  
+  .tech-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+  
+  .tech-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    margin-top: 2rem;
+    padding-left: 2rem;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-color);
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: 2px solid var(--primary-color);
+  }
+  
+  .timeline-date {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-content {
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  /* Contact Section */
+  .contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .contact-form {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(10, 25, 47, 0.8);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--hover-color);
+    box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.2);
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .contact-info {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .info-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
+  }
+  
+  .info-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    width: 40px;
+    text-align: center;
+  }
+  
+  .info-text {
+    flex: 1;
+  }
+  
+  .info-label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  
+  .info-value {
+    color: var(--text-color);
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+  }
+  
+  /* Footer */
+  footer {
+    background: var(--secondary-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 0rem;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icons a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    main {
+      padding: 2rem 1rem;
+    }
+    
+    .section {
+      padding: 1.5rem;
+    }
+    
+    .founder-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .contact-container {
+      flex-direction: column;
+    }
+  }
+  .profile {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 100%;
+  height: 280px; /* tu peux changer la hauteur selon ton design */
+  object-fit: cover; /* garde les proportions tout en remplissant l’espace */
+  display: block;
+
+}
+  .logo img {
+  height: 69px; /* Taille du logo */
+  width: auto; /* Garde les proportions */
+  display: block;
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Site Logo">
+    <div class="logo-text">DerQCV</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="math.html">Mathematical Mode</a>
+    <a href="quantique.html">Quantum Mode</a>
+    <a href="comparaison.html">Comparison</a>
+    <a href="apropos.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>About Derouiche Quantum Crypto Visualizer</h1>
+    <p class="subtitle">Discover the history and vision behind our educational project</p>
+    <p class="intro">
+      Derouiche Quantum Crypto Visualizer was born from the desire to make complex cryptography concepts accessible. 
+      By combining mathematics, quantum physics, and interactive visualizations, this project allows everyone to understand 
+      how digital security works to protect our daily data.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <i class="fas fa-lightbulb section-icon"></i>
+      <h2 class="section-title">Our Mission</h2>
+    </div>
+    <div class="section-content">
+      <p>
+        Cryptography is at the heart of our digital society, but its mechanisms often remain mysterious to the general public. 
+        Our mission is to demystify these technologies by visually showing the mathematical and physical processes 
+        that guarantee our online security.
+      </p>
+      <p>
+        We believe that education is the key to building a safer digital future. By making cryptography 
+        accessible and understandable, we help users make informed decisions about their online security.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <i class="fas fa-user section-icon"></i>
+      <h2 class="section-title">Founder</h2>
+    </div>
+    <div class="section-content">
+      <div class="founder-container">
+        <div class="founder-info">
+          <h3 class="founder-name">Ali Derouiche</h3>
+          <div class="founder-title">Computer Engineering Student & Security Enthusiast</div>
+          <div class="founder-bio">
+            <p>
+             Hello, I'm Ali Derouiche, passionate about cybersecurity, cryptography, and quantum physics.
+              I hold a strong background in mathematics and fundamental physics, having completed two years of studies in Fundamental Mathematics at the Faculty of Sciences of Monastir. 
+              I successfully passed the national entrance exam to the engineering cycle in the Mathematics-Physics section and am now pursuing my Computer Engineering studies at the International Multidisciplinary School.
+            </p>
+            <p>
+              This web project aims to provide educational and interactive tools to better understand classical and 
+              quantum cryptography concepts, combining theory with dynamic visualizations. It is designed to be 
+              accessible to students and enthusiasts wishing to discover these complex subjects in an intuitive way.
+            </p>
+            <p>
+              My skills cover symmetric and asymmetric cryptography, quantum algorithms, as well as front-end web 
+              development technologies. I aspire to apply this knowledge to contribute to the protection of 
+              computer systems against current and future threats.
+            </p>
+          </div>
+          
+          <div class="research-container">
+            <div class="research-header">
+              <div class="research-icon"><i class="fas fa-microscope"></i></div>
+              <div class="research-title">Scientific Research</div>
+            </div>
+            <div class="research-content">
+              <p>
+                I publish scientific research in various fields including mathematics, physics, cryptography, 
+                cybersecurity applications, and quantum computing. My research focuses on advancing theoretical 
+                foundations and practical applications in these interconnected domains.
+              </p>
+              <a href="https://monastir.academia.edu/AliDerouiche" target="_blank" class="research-link">
+                <i class="fas fa-external-link-alt"></i> View my Academia profile
+              </a>
+            </div>
+          </div>
+          
+          <div class="founder-skills">
+            <h4 class="skills-title">Skills & Expertise</h4>
+            <div class="skills-list">
+              <div class="skill-tag">Symmetric Cryptography</div>
+              <div class="skill-tag">Asymmetric Cryptography</div>
+              <div class="skill-tag">Quantum Algorithms</div>
+              <div class="skill-tag">Web Development</div>
+              <div class="skill-tag">Mathematics</div>
+              <div class="skill-tag">Physics</div>
+              <div class="skill-tag">Cybersecurity</div>
+              <div class="skill-tag">Quantum Computing</div>
+            </div>
+          </div>
+          
+          <div class="founder-social">
+            <a href="https://github.com/AliDerouiche" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ali-derouiche-7a3868283" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/AliDerouiche369" title="X"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://monastir.academia.edu/AliDerouiche" target="_blank" title="Academia"><i class="fas fa-graduation-cap"></i></a>
+            <a href="" title="derouicheali90@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <i class="fas fa-history section-icon"></i>
+      <h2 class="section-title">Project History</h2>
+    </div>
+    <div class="section-content">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">May 2025</div>
+          <div class="timeline-content">
+            <strong>Initial Idea</strong> - The project began as a simple idea to visualize RSA encryption
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">June 2025</div>
+          <div class="timeline-content">
+            <strong>Prototype Development</strong> - Creation of the first interactive visualizations
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">July 2025</div>
+          <div class="timeline-content">
+            <strong>Quantum Mode Addition</strong> - Integration of the BB84 protocol and quantum simulations
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">August 2025</div>
+          <div class="timeline-content">
+            <strong>Official Launch</strong> - Project publication and opening to the public
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Today</div>
+          <div class="timeline-content">
+            <strong>Continuous Evolution</strong> - Regular improvements and addition of new features
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <i class="fas fa-code section-icon"></i>
+      <h2 class="section-title">Technologies Used</h2>
+    </div>
+    <div class="section-content">
+      <p>
+        Our project is built with modern and open-source technologies to ensure an optimal user experience 
+        and easy maintenance.
+      </p>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fab fa-html5"></i></div>
+          <div class="tech-name">HTML5</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fab fa-css3-alt"></i></div>
+          <div class="tech-name">CSS3</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+          <div class="tech-name">JavaScript ES6+</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fas fa-cube"></i></div>
+          <div class="tech-name">GSAP</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fas fa-square-root-alt"></i></div>
+          <div class="tech-name">MathJax</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fas fa-lock"></i></div>
+          <div class="tech-name">CryptoJS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <i class="fas fa-envelope section-icon"></i>
+      <h2 class="section-title">Contact Us</h2>
+    </div>
+    <div class="section-content">
+      <p>
+        We are always open to suggestions, collaborations, and questions. Feel free to contact us!
+      </p>
+      <div class="contact-container">
+       
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div class="info-text">
+              <div class="info-label">Email</div>
+              <div class="info-value">derouicheali90@gmail.com</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fab fa-github"></i></div>
+            <div class="info-text">
+              <div class="info-label">GitHub</div>
+              <div class="info-value">https://github.com/AliDerouiche</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="info-text">
+              <div class="info-label">Academia</div>
+              <div class="info-value">monastir.academia.edu/AliDerouiche</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-text">
+              <div class="info-label">Location</div>
+              <div class="info-value">Sousse, Tunisia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Derouiche Quantum Crypto Visualizer – All rights reserved</p>
+    <div class="social-icons">
+      <a href="https://github.com/AliDerouiche" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/ali-derouiche-7a3868283" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://x.com/AliDerouiche369" title="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://monastir.academia.edu/AliDerouiche" target="_blank" title="Academia"><i class="fas fa-graduation-cap"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Animation au défilement
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Gestion du formulaire de contact
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Simuler l'envoi du formulaire
+    const button = this.querySelector('button');
+    const originalText = button.textContent;
+    button.textContent = 'Sending...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+      button.textContent = 'Message Sent!';
+      button.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '';
+        button.disabled = false;
+        this.reset();
+      }, 2000);
+    }, 1500);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logob.ico">
+<title>DerQCV-Mathematical Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- MathJax pour formules -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- CryptoJS CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<style>
+    .logo img {
+  height: 69px; /* Taille du logo */
+  width: auto; /* Garde les proportions */
+  display: block;
+  }
+  :root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --tertiary-color: #192E54;
+    --accent-color: #64FFDA;
+    --hover-color: #52d8c0;
+    --text-color: #CCD6F6;
+    --card-bg: rgba(17, 34, 64, 0.7);
+    --border-color: #203A5B;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Header */
+  header {
+    padding: 0.2rem 2rem;
+    background: rgba(17, 34, 64, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--accent-color), #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+  }
+  
+  .card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  select, input[type="text"], input[type="number"] {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    background: rgba(10, 25, 47, 0.8);
+    color: var(--text-color);
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  select:focus, input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: var(--hover-color);
+    box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.2);
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  button {
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary-color);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .secondary-button {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: none;
+  }
+  
+  .secondary-button:hover {
+    background: rgba(100, 255, 218, 0.1);
+  }
+  
+  #animation {
+    margin-top: 2rem;
+    background: var(--tertiary-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 100%;
+    min-height: 180px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #animation::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #animation::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  #animation::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.3);
+    border-radius: 4px;
+  }
+  
+  #animation::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 255, 218, 0.5);
+  }
+  
+  .step {
+    margin-bottom: 0.8rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  #formule {
+    margin-top: 2rem;
+    background: var(--tertiary-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 1.1rem;
+    display: none;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  #toggleFormule {
+    margin-top: 1rem;
+    cursor: pointer;
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  #toggleFormule:hover {
+    color: var(--hover-color);
+  }
+  
+  .info-text {
+    font-size: 0.85rem;
+    color: #8892B0;
+    margin-top: 0.5rem;
+  }
+  
+  .algorithm-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(100, 255, 218, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-color);
+  }
+  
+  .algorithm-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+  }
+  
+  .algorithm-description {
+    flex: 1;
+  }
+  
+  .algorithm-name {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.3rem;
+  }
+  
+  .progress-container {
+    margin-top: 1.5rem;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--hover-color));
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-text {
+    text-align: right;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    color: #8892B0;
+  }
+  
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-color);
+    max-width: 300px;
+  }
+  
+  .notification.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .notification.error {
+    border-left-color: var(--error-color);
+  }
+  
+  .notification.success {
+    border-left-color: var(--success-color);
+  }
+  
+  /* Footer */
+  footer {
+    background: var(--secondary-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    main {
+      padding: 1rem;
+    }
+    
+    .card {
+      padding: 1.5rem;
+    }
+    
+    .button-container {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Site Logo">
+    <div class="logo-text">DerQCV</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="math.html">Mathematical Mode</a>
+    <a href="quantique.html">Quantum Mode</a>
+    <a href="comparaison.html">Comparison</a>
+    <a href="apropos.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>Mathematical Mode</h1>
+    <p class="subtitle">Choose your encryption algorithm and visualize the mathematical process</p>
+  </div>
+  
+  <div class="card">
+    <div class="form-group">
+      <label for="cipherType">Encryption Type:</label>
+      <select id="cipherType">
+        <option value="cesar">Caesar (simple shift)</option>
+        <option value="vigenere">Vigenère (textual key)</option>
+        <option value="rsa">RSA (simplified)</option>
+        <option value="aes">AES (symmetric)</option>
+      </select>
+    </div>
+    
+    <div class="algorithm-info" id="algorithmInfo">
+      <div class="algorithm-icon"><i class="fas fa-exchange-alt"></i></div>
+      <div class="algorithm-description">
+        <div class="algorithm-name" id="algorithmName">Shift Cipher</div>
+        <div id="algorithmDesc">The Caesar cipher is one of the simplest traditional ciphers. It's a substitution cipher where each letter is replaced by another at a fixed distance in the alphabet.</div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="message">Enter a message:</label>
+      <input type="text" id="message" placeholder="Plain text..." maxlength="100" />
+    </div>
+    
+    <!-- Dynamic key fields based on encryption type -->
+    <div id="keyFields"></div>
+    
+    <div class="button-container">
+      <button id="encryptBtn">
+        <i class="fas fa-lock"></i> Encrypt
+      </button>
+      <button id="resetBtn" class="secondary-button">
+        <i class="fas fa-redo"></i> Reset
+      </button>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">0%</div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div id="animation"></div>
+    <div id="toggleFormule">Show Mathematical Formula</div>
+    <div id="formule"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Quantum Crypto Visualizer – All rights reserved</p>
+  </div>
+</footer>
+
+<div class="notification" id="notification"></div>
+
+<script>
+  const cipherTypeSelect = document.getElementById('cipherType');
+  const messageInput = document.getElementById('message');
+  const keyFieldsDiv = document.getElementById('keyFields');
+  const encryptBtn = document.getElementById('encryptBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const animationDiv = document.getElementById('animation');
+  const toggleFormule = document.getElementById('toggleFormule');
+  const formuleDiv = document.getElementById('formule');
+  const algorithmInfo = document.getElementById('algorithmInfo');
+  const algorithmName = document.getElementById('algorithmName');
+  const algorithmDesc = document.getElementById('algorithmDesc');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const notification = document.getElementById('notification');
+  
+  // Algorithm information
+  const algorithmInfos = {
+    cesar: {
+      name: "Shift Cipher",
+      description: "The Caesar cipher is one of the simplest traditional ciphers. It's a substitution cipher where each letter is replaced by another at a fixed distance in the alphabet.",
+      icon: "fas fa-exchange-alt"
+    },
+    vigenere: {
+      name: "Polyalphabetic Cipher",
+      description: "The Vigenère cipher is a polyalphabetic cipher system. It uses a key to shift each letter of the plain text by a variable number of positions.",
+      icon: "fas fa-key"
+    },
+    rsa: {
+      name: "Asymmetric Encryption",
+      description: "RSA is an asymmetric cryptography algorithm. It uses a key pair: a public key to encrypt and a private key to decrypt.",
+      icon: "fas fa-lock"
+    },
+    aes: {
+      name: "Symmetric Encryption",
+      description: "AES (Advanced Encryption Standard) is a symmetric encryption algorithm. It uses the same key to encrypt and decrypt data.",
+      icon: "fas fa-shield-alt"
+    }
+  };
+  
+  // Update key fields based on encryption type
+  function updateKeyFields() {
+    const type = cipherTypeSelect.value;
+    keyFieldsDiv.innerHTML = '';
+    
+    // Update algorithm information
+    const info = algorithmInfos[type];
+    algorithmInfo.querySelector('.algorithm-icon').className = `algorithm-icon ${info.icon}`;
+    algorithmName.textContent = info.name;
+    algorithmDesc.textContent = info.description;
+    
+    if (type === 'cesar') {
+      keyFieldsDiv.innerHTML = `
+        <div class="form-group">
+          <label for="keyCesar">Key (shift 1-25):</label>
+          <input type="number" id="keyCesar" min="1" max="25" value="3" />
+          <div class="info-text">Enter a number between 1 and 25 to shift the letters of the alphabet.</div>
+        </div>
+      `;
+    } else if (type === 'vigenere') {
+      keyFieldsDiv.innerHTML = `
+        <div class="form-group">
+          <label for="keyVigenere">Key (alphabetic text):</label>
+          <input type="text" id="keyVigenere" placeholder="ex: KEY" maxlength="20" />
+          <div class="info-text">The key must contain only letters. It will be repeated to match the length of the message.</div>
+        </div>
+      `;
+    } else if (type === 'rsa') {
+      keyFieldsDiv.innerHTML = `
+        <div class="form-group">
+          <label>RSA Keys (small numbers for demo)</label>
+          <div class="form-group">
+            <label for="keyRSAe">Public Key e:</label>
+            <input type="number" id="keyRSAe" value="7" />
+          </div>
+          <div class="form-group">
+            <label for="keyRSAn">Modulo n:</label>
+            <input type="number" id="keyRSAn" value="33" />
+          </div>
+          <div class="form-group">
+            <label for="keyRSAd">Private Key d:</label>
+            <input type="number" id="keyRSAd" value="3" />
+          </div>
+          <div class="info-text">For the demo, use only uppercase letters without spaces.</div>
+        </div>
+      `;
+    } else if (type === 'aes') {
+      keyFieldsDiv.innerHTML = `
+        <div class="form-group">
+          <label for="keyAES">Secret Key (text, variable length):</label>
+          <input type="text" id="keyAES" placeholder="ex: mySecretKey123" maxlength="32" />
+          <div class="info-text">The message can contain any character. The key must be kept secret.</div>
+        </div>
+      `;
+    }
+  }
+  
+  cipherTypeSelect.addEventListener('change', () => {
+    updateKeyFields();
+    animationDiv.textContent = '';
+    formuleDiv.style.display = 'none';
+    toggleFormule.textContent = 'Show Mathematical Formula';
+    resetProgress();
+  });
+  
+  updateKeyFields();
+  
+  // Encryption functions
+  // Caesar
+  function caesarEncrypt(text, key) {
+    key = key % 26;
+    let result = '';
+    for (let char of text) {
+      const code = char.charCodeAt(0);
+      if (code >= 65 && code <= 90) {
+        let c = ((code - 65 + key) % 26) + 65;
+        result += String.fromCharCode(c);
+      } else if (code >= 97 && code <= 122) {
+        let c = ((code - 97 + key) % 26) + 97;
+        result += String.fromCharCode(c);
+      } else {
+        result += char;
+      }
+    }
+    return result;
+  }
+  
+  // Vigenère
+  function vigenereEncrypt(text, key) {
+    let result = '';
+    key = key.toUpperCase().replace(/[^A-Z]/g, '');
+    if (!key) return null;
+    let keyIndex = 0;
+    for (let char of text) {
+      let code = char.charCodeAt(0);
+      if (code >= 65 && code <= 90) {
+        let shift = key.charCodeAt(keyIndex % key.length) - 65;
+        let c = ((code - 65 + shift) % 26) + 65;
+        result += String.fromCharCode(c);
+        keyIndex++;
+      } else if (code >= 97 && code <= 122) {
+        let shift = key.charCodeAt(keyIndex % key.length) - 65;
+        let c = ((code - 97 + shift) % 26) + 97;
+        result += String.fromCharCode(c);
+        keyIndex++;
+      } else {
+        result += char;
+      }
+    }
+    return result;
+  }
+  
+  // Simplified RSA
+  function modPow(base, exponent, modulus) {
+    if (modulus === 1) return 0;
+    let result = 1;
+    base = base % modulus;
+    while (exponent > 0) {
+      if (exponent % 2 === 1) {
+        result = (result * base) % modulus;
+      }
+      exponent = Math.floor(exponent / 2);
+      base = (base * base) % modulus;
+    }
+    return result;
+  }
+  
+  function rsaEncrypt(text, e, n) {
+    text = text.toUpperCase().replace(/[^A-Z]/g, '');
+    if (!text) return null;
+    let encrypted = [];
+    for (let char of text) {
+      let m = char.charCodeAt(0) - 65;
+      let c = modPow(m, e, n);
+      encrypted.push(c);
+    }
+    return encrypted.join(' ');
+  }
+  
+  // AES via CryptoJS
+  function aesEncrypt(text, key) {
+    try {
+      const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+      return encrypted;
+    } catch {
+      return null;
+    }
+  }
+  
+  // Mathematical formulas
+  function getFormula(type) {
+    if (type === 'cesar') {
+      return `$$ C = (M + k) \\mod 26 $$  
+      Where:  
+      \\( M \\) = numerical value of the letter (A=0, B=1, ...)  
+      \\( k \\) = shift key  
+      \\( C \\) = encrypted letter`;
+    } else if (type === 'vigenere') {
+      return `$$ C_i = (M_i + K_j) \\mod 26 $$  
+      Where:  
+      \\( M_i \\) = i-th letter of the message (numerical value)  
+      \\( K_j \\) = j-th letter of the key (numerical value)  
+      \\( C_i \\) = i-th encrypted letter  
+      With \\( j = i \\mod \\text{key length} $$`;
+    } else if (type === 'rsa') {
+      return `$$ C = M^e \\mod n $$  
+      Where:  
+      \\( M \\) = message encoded as a number (ex: letter A=0, B=1...)  
+      \\( e \\) = public exponent  
+      \\( n \\) = modulo  
+      \\( C \\) = encrypted message`;
+    } else if (type === 'aes') {
+      return `$$ C = \\text{AES}_{key}(M) $$  
+      Where:  
+      \\( M \\) = plain text message  
+      \\( key \\) = shared secret key  
+      \\( C \\) = encrypted AES message`;
+    }
+    return '';
+  }
+  
+  toggleFormule.addEventListener('click', () => {
+    if (formuleDiv.style.display === 'none') {
+      formuleDiv.style.display = 'block';
+      toggleFormule.textContent = "Hide Mathematical Formula";
+      formuleDiv.innerHTML = getFormula(cipherTypeSelect.value);
+      MathJax.typesetPromise();
+    } else {
+      formuleDiv.style.display = 'none';
+      toggleFormule.textContent = 'Show Mathematical Formula';
+    }
+  });
+  
+  function resetProgress() {
+    progressFill.style.width = '0%';
+    progressText.textContent = '0%';
+  }
+  
+  function updateProgress(percent) {
+    progressFill.style.width = `${percent}%`;
+    progressText.textContent = `${percent}%`;
+  }
+  
+  function showNotification(message, type = 'info', duration = 3000) {
+    notification.textContent = message;
+    notification.className = 'notification';
+    notification.classList.add(type, 'show');
+    
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, duration);
+  }
+  
+  encryptBtn.addEventListener('click', () => {
+    const type = cipherTypeSelect.value;
+    const message = messageInput.value.trim();
+    animationDiv.textContent = '';
+    formuleDiv.style.display = 'none';
+    toggleFormule.textContent = 'Show Mathematical Formula';
+    resetProgress();
+    
+    if (!message) {
+      showNotification("Please enter a message.", "error");
+      return;
+    }
+    
+    encryptBtn.disabled = true;
+    
+    if (type === 'cesar') {
+      const keyCesar = parseInt(document.getElementById('keyCesar').value);
+      if (isNaN(keyCesar) || keyCesar < 1 || keyCesar > 25) {
+        showNotification("The Caesar key must be a number between 1 and 25.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const steps = [
+        `Plain text: ${message}`,
+        `ASCII conversion: ${message.split('').map(c => c.charCodeAt(0)).join(' ')}`,
+        `Applying Caesar cipher with key k = ${keyCesar}...`,
+        `Encrypted message: ${caesarEncrypt(message, keyCesar)}`
+      ];
+      animateSteps(steps);
+    } else if (type === 'vigenere') {
+      const keyVigenere = document.getElementById('keyVigenere').value.trim();
+      if (!keyVigenere.match(/^[a-zA-Z]+$/)) {
+        showNotification("The Vigenère key must contain only letters.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const encrypted = vigenereEncrypt(message, keyVigenere);
+      if (!encrypted) {
+        showNotification("Error in Vigenère encryption.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const steps = [
+        `Plain text: ${message}`,
+        `Key used: ${keyVigenere.toUpperCase()}`,
+        `Applying Vigenère cipher...`,
+        `Encrypted message: ${encrypted}`
+      ];
+      animateSteps(steps);
+    } else if (type === 'rsa') {
+      const e = parseInt(document.getElementById('keyRSAe').value);
+      const n = parseInt(document.getElementById('keyRSAn').value);
+      const d = parseInt(document.getElementById('keyRSAd').value);
+      if ([e,n,d].some(v => isNaN(v) || v <= 0)) {
+        showNotification("Please enter valid RSA keys (positive numbers).", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      if (!message.match(/^[A-Z]+$/)) {
+        showNotification("For RSA, use only uppercase letters without spaces.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const encrypted = rsaEncrypt(message, e, n);
+      if (!encrypted) {
+        showNotification("Error in RSA encryption.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const steps = [
+        `Plain text: ${message}`,
+        `Public key: e = ${e}, n = ${n}`,
+        `Applying RSA encryption...`,
+        `Encrypted message (numbers): ${encrypted}`
+      ];
+      animateSteps(steps);
+    } else if (type === 'aes') {
+      const keyAES = document.getElementById('keyAES').value;
+      if (!keyAES) {
+        showNotification("Please enter a secret key for AES.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const encrypted = aesEncrypt(message, keyAES);
+      if (!encrypted) {
+        showNotification("Error in AES encryption.", "error");
+        encryptBtn.disabled = false;
+        return;
+      }
+      const steps = [
+        `Plain text: ${message}`,
+        `Secret key: ${keyAES}`,
+        `Applying AES encryption...`,
+        `Encrypted message (base64): ${encrypted}`
+      ];
+      animateSteps(steps);
+    }
+  });
+  
+  resetBtn.addEventListener('click', () => {
+    messageInput.value = '';
+    animationDiv.textContent = '';
+    formuleDiv.style.display = 'none';
+    toggleFormule.textContent = 'Show Mathematical Formula';
+    resetProgress();
+    showNotification("Simulation reset", "info");
+  });
+  
+  function animateSteps(steps) {
+    let step = 0;
+    animationDiv.innerHTML = '';
+    
+    function showStep() {
+      if (step < steps.length) {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step';
+        stepDiv.textContent = steps[step];
+        animationDiv.appendChild(stepDiv);
+        
+        updateProgress(Math.round(((step + 1) / steps.length) * 100));
+        
+        step++;
+        setTimeout(showStep, 1800);
+      } else {
+        encryptBtn.disabled = false;
+        showNotification("Encryption completed successfully!", "success");
+      }
+    }
+    
+    showStep();
+  }
+</script>
+</body>
+</html>

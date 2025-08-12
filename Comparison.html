@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logob.ico">
+<title>DerQCV-Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .logo img {
+  height: 69px; /* Taille du logo */
+  width: auto; /* Garde les proportions */
+  display: block;
+  }
+  :root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --tertiary-color: #192E54;
+    --accent-color: #64FFDA;
+    --hover-color: #52d8c0;
+    --text-color: #CCD6F6;
+    --card-bg: rgba(17, 34, 64, 0.7);
+    --border-color: #203A5B;
+    --rsa-color: #4361ee;
+    --bb84-color: #64FFDA;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header */
+  header {
+    padding: 0.2rem 2rem;
+    background: rgba(17, 34, 64, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, var(--accent-color), #00BCD4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+  }
+  
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  @media (max-width: 768px) {
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .comparison-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .comparison-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+  
+  .rsa-icon {
+    background: linear-gradient(45deg, var(--rsa-color), #3a0ca3);
+    color: white;
+  }
+  
+  .bb84-icon {
+    background: linear-gradient(45deg, var(--bb84-color), #00BCD4);
+    color: var(--primary-color);
+  }
+  
+  .card-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .rsa-title {
+    color: var(--rsa-color);
+  }
+  
+  .bb84-title {
+    color: var(--bb84-color);
+  }
+  
+  .steps-container {
+    margin-top: 1.5rem;
+  }
+  
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 10px;
+    border-left: 3px solid;
+    transition: all 0.3s ease;
+  }
+  
+  .step:hover {
+    transform: translateX(5px);
+  }
+  
+  .rsa-step {
+    border-left-color: var(--rsa-color);
+  }
+  
+  .bb84-step {
+    border-left-color: var(--bb84-color);
+  }
+  
+  .step-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    min-width: 30px;
+    text-align: center;
+  }
+  
+  .rsa-number {
+    color: var(--rsa-color);
+  }
+  
+  .bb84-number {
+    color: var(--bb84-color);
+  }
+  
+  .step-content {
+    flex: 1;
+  }
+  
+  .step-title {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  
+  .step-description {
+    font-size: 0.9rem;
+    color: #8892B0;
+    line-height: 1.4;
+  }
+  
+  /* Simulation Styles */
+  .simulation-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+  }
+  
+  .simulation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .simulation-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .rsa-sim-title {
+    color: var(--rsa-color);
+  }
+  
+  .bb84-sim-title {
+    color: var(--bb84-color);
+  }
+  
+  .simulation-controls {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .sim-button {
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border: none;
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .sim-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+  }
+  
+  .sim-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .animation-area {
+    background: var(--tertiary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    min-height: 120px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    overflow-y: auto;
+    max-height: 200px;
+  }
+  
+  .animation-step {
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .progress-container {
+    margin-top: 1rem;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--hover-color));
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-text {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #8892B0;
+    margin-top: 0.3rem;
+  }
+  
+  /* RSA Animation Specific */
+  .rsa-animation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .key-display {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .key-box {
+    padding: 0.8rem;
+    background: rgba(67, 97, 238, 0.1);
+    border-radius: 8px;
+    border: 1px solid var(--rsa-color);
+    text-align: center;
+    flex: 1;
+  }
+  
+  .key-label {
+    font-size: 0.8rem;
+    color: var(--rsa-color);
+    margin-bottom: 0.3rem;
+  }
+  
+  .key-value {
+    font-family: monospace;
+    font-weight: 600;
+  }
+  
+  /* BB84 Animation Specific */
+  .bb84-animation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .photon-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .photon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    border: 2px solid var(--bb84-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+  
+  .photon.measured {
+    background: rgba(100, 255, 218, 0.2);
+  }
+  
+  .photon.correct {
+    border-color: var(--success-color);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  }
+  
+  .photon.wrong {
+    border-color: var(--error-color);
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+  }
+  
+  .basis-display {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+  }
+  
+  .basis-item {
+    padding: 0.3rem 0.8rem;
+    background: rgba(100, 255, 218, 0.1);
+    border-radius: 15px;
+    border: 1px solid var(--bb84-color);
+  }
+  
+  .comparison-table-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .table-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--tertiary-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  th {
+    background: var(--secondary-color);
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .rating i {
+    color: var(--accent-color);
+  }
+  
+  .rating i.empty {
+    color: rgba(100, 255, 218, 0.3);
+  }
+  
+  .chart-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .chart-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+  }
+  
+  .chart-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .chart-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+  }
+  
+  .chart-bars {
+    display: flex;
+    gap: 1rem;
+    height: 40px;
+  }
+  
+  .chart-bar-container {
+    flex: 1;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .chart-bar {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1.5s ease-out;
+    position: relative;
+  }
+  
+  .rsa-bar {
+    background: linear-gradient(90deg, var(--rsa-color), #3a0ca3);
+  }
+  
+  .bb84-bar {
+    background: linear-gradient(90deg, var(--bb84-color), #00BCD4);
+  }
+  
+  .chart-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .chart-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #8892B0;
+  }
+  
+  .conclusion {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .conclusion h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .conclusion p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+  }
+  
+  /* Footer */
+  footer {
+    background: var(--secondary-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    main {
+      padding: 1rem;
+    }
+    
+    .comparison-card {
+      padding: 1.5rem;
+    }
+    
+    .chart-bars {
+      flex-direction: column;
+      height: auto;
+      gap: 0.5rem;
+    }
+    
+    .chart-bar-container {
+      width: 100%;
+    }
+    
+    .key-display {
+      flex-direction: column;
+    }
+    
+    .photon-row {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Site Logo">
+    <div class="logo-text">DerQCV</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="math.html">Mathematical Mode</a>
+    <a href="quantique.html">Quantum Mode</a>
+    <a href="comparaison.html">Comparison</a>
+    <a href="apropos.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1>Comparison</h1>
+    <p class="subtitle">RSA vs BB84: Classical vs Quantum Cryptography</p>
+  </div>
+  
+  <div class="comparison-grid">
+    <div class="comparison-card">
+      <div class="card-header">
+        <div class="card-icon rsa-icon">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h2 class="card-title rsa-title">Classical Cryptography (RSA)</h2>
+      </div>
+      
+      <div class="steps-container">
+        <div class="step rsa-step">
+          <div class="step-number rsa-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Key Generation</div>
+            <div class="step-description">Generate public/private key pair using large prime numbers</div>
+          </div>
+        </div>
+        
+        <div class="step rsa-step">
+          <div class="step-number rsa-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Public Key Distribution</div>
+            <div class="step-description">Share public key while keeping private key secret</div>
+          </div>
+        </div>
+        
+        <div class="step rsa-step">
+          <div class="step-number rsa-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Encryption</div>
+            <div class="step-description">Sender encrypts message using recipient's public key</div>
+          </div>
+        </div>
+        
+        <div class="step rsa-step">
+          <div class="step-number rsa-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Transmission</div>
+            <div class="step-description">Send encrypted message over insecure channel</div>
+          </div>
+        </div>
+        
+        <div class="step rsa-step">
+          <div class="step-number rsa-number">5</div>
+          <div class="step-content">
+            <div class="step-title">Decryption</div>
+            <div class="step-description">Recipient decrypts using their private key</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="simulation-container">
+        <div class="simulation-header">
+          <div class="simulation-title rsa-sim-title">
+            <i class="fas fa-play-circle"></i> RSA Simulation
+          </div>
+          <div class="simulation-controls">
+            <button class="sim-button" id="startRSA">
+              <i class="fas fa-play"></i> Start
+            </button>
+            <button class="sim-button" id="resetRSA">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+        </div>
+        
+        <div class="animation-area" id="rsaAnimation">
+          Click "Start" to begin the RSA encryption simulation
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="rsaProgress"></div>
+          </div>
+          <div class="progress-text" id="rsaProgressText">0%</div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(67, 97, 238, 0.1); border-radius: 8px; border-left: 3px solid var(--rsa-color);">
+        <strong style="color: var(--rsa-color);">Principle:</strong> Based on mathematical complexity of factoring large numbers
+      </div>
+    </div>
+    
+    <div class="comparison-card">
+      <div class="card-header">
+        <div class="card-icon bb84-icon">
+          <i class="fas fa-atom"></i>
+        </div>
+        <h2 class="card-title bb84-title">Quantum Cryptography (BB84)</h2>
+      </div>
+      
+      <div class="steps-container">
+        <div class="step bb84-step">
+          <div class="step-number bb84-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Quantum State Preparation</div>
+            <div class="step-description">Alice prepares photons in random quantum states</div>
+          </div>
+        </div>
+        
+        <div class="step bb84-step">
+          <div class="step-number bb84-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Quantum Transmission</div>
+            <div class="step-description">Send photons through quantum channel to Bob</div>
+          </div>
+        </div>
+        
+        <div class="step bb84-step">
+          <div class="step-number bb84-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Random Measurement</div>
+            <div class="step-description">Bob measures photons in randomly chosen bases</div>
+          </div>
+        </div>
+        
+        <div class="step bb84-step">
+          <div class="step-number bb84-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Base Comparison</div>
+            <div class="step-description">Public discussion to compare measurement bases</div>
+          </div>
+        </div>
+        
+        <div class="step bb84-step">
+          <div class="step-number bb84-number">5</div>
+          <div class="step-content">
+            <div class="step-title">Key Generation</div>
+            <div class="step-description">Generate secret key from matching measurement results</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="simulation-container">
+        <div class="simulation-header">
+          <div class="simulation-title bb84-sim-title">
+            <i class="fas fa-play-circle"></i> BB84 Simulation
+          </div>
+          <div class="simulation-controls">
+            <button class="sim-button" id="startBB84">
+              <i class="fas fa-play"></i> Start
+            </button>
+            <button class="sim-button" id="resetBB84">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+        </div>
+        
+        <div class="animation-area" id="bb84Animation">
+          Click "Start" to begin the BB84 quantum key distribution simulation
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="bb84Progress"></div>
+          </div>
+          <div class="progress-text" id="bb84ProgressText">0%</div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(100, 255, 218, 0.1); border-radius: 8px; border-left: 3px solid var(--bb84-color);">
+        <strong style="color: var(--bb84-color);">Principle:</strong> Based on laws of quantum mechanics and uncertainty principle
+      </div>
+    </div>
+  </div>
+  
+  <div class="comparison-table-container">
+    <div class="table-title">
+      <i class="fas fa-balance-scale"></i> Detailed Comparison Table
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>RSA (Classical)</th>
+          <th>BB84 (Quantum)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Security Foundation</strong></td>
+          <td>Based on mathematical complexity of factoring large numbers</td>
+          <td>Based on laws of quantum mechanics and physics</td>
+        </tr>
+        <tr>
+          <td><strong>Quantum Threat Resistance</strong></td>
+          <td>Vulnerable to quantum computers (Shor's algorithm)</td>
+          <td>Resistant to quantum computing attacks</td>
+        </tr>
+        <tr>
+          <td><strong>Intrusion Detection</strong></td>
+          <td>No automatic intrusion detection possible</td>
+          <td>Automatic detection of eavesdropping attempts</td>
+        </tr>
+        <tr>
+          <td><strong>Speed</strong></td>
+          <td>Fast encryption/decryption operations</td>
+          <td>Slower due to quantum measurement limitations</td>
+        </tr>
+        <tr>
+          <td><strong>Infrastructure Requirements</strong></td>
+          <td>Standard computer hardware and software</td>
+          <td>Specialized quantum equipment and fiber optics</td>
+        </tr>
+        <tr>
+          <td><strong>Key Distribution</strong></td>
+          <td>Requires secure channel for key exchange</td>
+          <td>Secure key distribution over public channels</td>
+        </tr>
+        <tr>
+          <td><strong>Security Level</strong></td>
+          <td>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star empty"></i>
+            </div>
+          </td>
+          <td>
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="chart-container">
+    <div class="chart-title">
+      <i class="fas fa-chart-bar"></i> Performance Comparison
+    </div>
+    <div class="chart-grid">
+      <div class="chart-item">
+        <div class="chart-labels">
+          <span>RSA</span>
+          <span>BB84</span>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-bar-container">
+            <div class="chart-bar rsa-bar" id="rsa-security" style="width: 0%"></div>
+          </div>
+          <div class="chart-bar-container">
+            <div class="chart-bar bb84-bar" id="bb84-security" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="chart-values">
+          <span>75%</span>
+          <span>98%</span>
+        </div>
+      </div>
+      
+      <div class="chart-item">
+        <div class="chart-labels">
+          <span>RSA</span>
+          <span>BB84</span>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-bar-container">
+            <div class="chart-bar rsa-bar" id="rsa-speed" style="width: 0%"></div>
+          </div>
+          <div class="chart-bar-container">
+            <div class="chart-bar bb84-bar" id="bb84-speed" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="chart-values">
+          <span>90%</span>
+          <span>40%</span>
+        </div>
+      </div>
+      
+      <div class="chart-item">
+        <div class="chart-labels">
+          <span>RSA</span>
+          <span>BB84</span>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-bar-container">
+            <div class="chart-bar rsa-bar" id="rsa-quantum" style="width: 0%"></div>
+          </div>
+          <div class="chart-bar-container">
+            <div class="chart-bar bb84-bar" id="bb84-quantum" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="chart-values">
+          <span>20%</span>
+          <span>95%</span>
+        </div>
+      </div>
+      
+      <div class="chart-item">
+        <div class="chart-labels">
+          <span>RSA</span>
+          <span>BB84</span>
+        </div>
+        <div class="chart-bars">
+          <div class="chart-bar-container">
+            <div class="chart-bar rsa-bar" id="rsa-access" style="width: 0%"></div>
+          </div>
+          <div class="chart-bar-container">
+            <div class="chart-bar bb84-bar" id="bb84-access" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="chart-values">
+          <span>85%</span>
+          <span>30%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="conclusion">
+    <h3>The Future of Cryptography</h3>
+    <p>
+      As quantum computing advances, classical cryptographic systems like RSA face increasing threats. 
+      Quantum cryptography protocols like BB84 represent the future of secure communication, 
+      offering unconditional security based on the fundamental laws of physics rather than computational complexity.
+    </p>
+    <p>
+      While RSA remains widely used and effective for current applications, the transition to 
+      quantum-resistant cryptography is essential for long-term security in the quantum era.
+    </p>
+    <a href="quantique.html" class="cta-button">Explore Quantum Mode</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2025 Quantum Crypto Visualizer – All rights reserved</p>
+  </div>
+</footer>
+
+<script>
+  // RSA Simulation
+  const startRSABtn = document.getElementById('startRSA');
+  const resetRSABtn = document.getElementById('resetRSA');
+  const rsaAnimation = document.getElementById('rsaAnimation');
+  const rsaProgress = document.getElementById('rsaProgress');
+  const rsaProgressText = document.getElementById('rsaProgressText');
+  
+  // BB84 Simulation
+  const startBB84Btn = document.getElementById('startBB84');
+  const resetBB84Btn = document.getElementById('resetBB84');
+  const bb84Animation = document.getElementById('bb84Animation');
+  const bb84Progress = document.getElementById('bb84Progress');
+  const bb84ProgressText = document.getElementById('bb84ProgressText');
+  
+  // RSA Simulation Functions
+  function runRSASimulation() {
+    startRSABtn.disabled = true;
+    rsaAnimation.innerHTML = '';
+    rsaProgress.style.width = '0%';
+    rsaProgressText.textContent = '0%';
+    
+    const steps = [
+      'Generating prime numbers p=61 and q=53...',
+      'Calculating n = p × q = 3233',
+      'Calculating φ(n) = (p-1)(q-1) = 3120',
+      'Choosing public exponent e=17',
+      'Calculating private key d=2753',
+      'Public key: (e=17, n=3233)',
+      'Private key: d=2753',
+      'Message to encrypt: "HELLO"',
+      'Converting to ASCII: 72-69-76-76-79',
+      'Encrypting each character...',
+      'H (72) → 72^17 mod 3233 = 3115',
+      'E (69) → 69^17 mod 3233 = 1832',
+      'L (76) → 76^17 mod 3233 = 2609',
+      'L (76) → 76^17 mod 3233 = 2609',
+      'O (79) → 79^17 mod 3233 = 1827',
+      'Encrypted message: 3115 1832 2609 2609 1827',
+      'Decryption successful with private key!'
+    ];
+    
+    let stepIndex = 0;
+    
+    function showNextStep() {
+      if (stepIndex < steps.length) {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'animation-step';
+        stepDiv.textContent = steps[stepIndex];
+        rsaAnimation.appendChild(stepDiv);
+        
+        const progress = Math.round(((stepIndex + 1) / steps.length) * 100);
+        rsaProgress.style.width = `${progress}%`;
+        rsaProgressText.textContent = `${progress}%`;
+        
+        rsaAnimation.scrollTop = rsaAnimation.scrollHeight;
+        stepIndex++;
+        
+        setTimeout(showNextStep, 1000);
+      } else {
+        startRSABtn.disabled = false;
+      }
+    }
+    
+    showNextStep();
+  }
+  
+  // BB84 Simulation Functions
+  function runBB84Simulation() {
+    startBB84Btn.disabled = true;
+    bb84Animation.innerHTML = '';
+    bb84Progress.style.width = '0%';
+    bb84ProgressText.textContent = '0%';
+    
+    const steps = [
+      'Alice generates random bits: 1 0 0 1 1 0 1 0',
+      'Alice chooses random bases: + × × + + × + ×',
+      'Alice sends polarized photons...',
+      'Bob chooses random bases: × + × × + + ×',
+      'Bob measures photons...',
+      'Measurement results: 1 0 1 1 1 0 1 0',
+      'Public basis comparison...',
+      'Matching bases: positions 2,4,5,7',
+      'Shared secret key: 0 1 1 0',
+      'Key successfully generated!',
+      'No eavesdropping detected - secure communication!'
+    ];
+    
+    let stepIndex = 0;
+    
+    function showNextStep() {
+      if (stepIndex < steps.length) {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'animation-step';
+        stepDiv.textContent = steps[stepIndex];
+        bb84Animation.appendChild(stepDiv);
+        
+        const progress = Math.round(((stepIndex + 1) / steps.length) * 100);
+        bb84Progress.style.width = `${progress}%`;
+        bb84ProgressText.textContent = `${progress}%`;
+        
+        bb84Animation.scrollTop = bb84Animation.scrollHeight;
+        stepIndex++;
+        
+        setTimeout(showNextStep, 1200);
+      } else {
+        startBB84Btn.disabled = false;
+      }
+    }
+    
+    showNextStep();
+  }
+  
+  // Event Listeners
+  startRSABtn.addEventListener('click', runRSASimulation);
+  resetRSABtn.addEventListener('click', () => {
+    rsaAnimation.innerHTML = 'Click "Start" to begin the RSA encryption simulation';
+    rsaProgress.style.width = '0%';
+    rsaProgressText.textContent = '0%';
+    startRSABtn.disabled = false;
+  });
+  
+  startBB84Btn.addEventListener('click', runBB84Simulation);
+  resetBB84Btn.addEventListener('click', () => {
+    bb84Animation.innerHTML = 'Click "Start" to begin the BB84 quantum key distribution simulation';
+    bb84Progress.style.width = '0%';
+    bb84ProgressText.textContent = '0%';
+    startBB84Btn.disabled = false;
+  });
+  
+  // Animate charts on page load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Security comparison
+      document.getElementById('rsa-security').style.width = '75%';
+      document.getElementById('bb84-security').style.width = '98%';
+      
+      // Speed comparison
+      document.getElementById('rsa-speed').style.width = '90%';
+      document.getElementById('bb84-speed').style.width = '40%';
+      
+      // Quantum resistance
+      document.getElementById('rsa-quantum').style.width = '20%';
+      document.getElementById('bb84-quantum').style.width = '95%';
+      
+      // Accessibility
+      document.getElementById('rsa-access').style.width = '85%';
+      document.getElementById('bb84-access').style.width = '30%';
+    }, 500);
+  });
+  
+  // Add hover effects to steps
+  document.querySelectorAll('.step').forEach(step => {
+    step.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateX(10px)';
+    });
+    
+    step.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateX(0)';
+    });
+  });
+</script>
+</body>
+</html>
