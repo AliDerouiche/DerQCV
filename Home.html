@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logob.ico">
+<title>DerQCV-Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --accent-color: #64FFDA;
+    --text-color: #CCD6F6;
+    --card-bg: rgba(17, 34, 64, 0.7);
+    --hover-color: #00BCD4;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* Header */
+  header {
+    padding: 0.2rem 2rem;
+    background: rgba(17, 34, 64, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    animation: fadeIn 1s ease;
+  }
+  
+  .hero {
+    max-width: 900px;
+    margin-bottom: 0rem;
+  }
+  
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+  }
+  
+  .intro {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    cursor: pointer;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+  }
+  
+  /* Features Section */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    width: 100%;
+    margin: 3rem 0;
+  }
+  
+  .feature-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+    animation: fadeIn 1s ease forwards;
+    opacity: 0;
+  }
+  
+  .feature-card:nth-child(1) { animation-delay: 0.2s; }
+  .feature-card:nth-child(2) { animation-delay: 0.4s; }
+  .feature-card:nth-child(3) { animation-delay: 0.6s; }
+  .feature-card:nth-child(4) { animation-delay: 0.8s; }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-color);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+  
+  .feature-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+  }
+  
+  .feature-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Visual Elements */
+  .visual-elements {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 0rem 0;
+    overflow: hidden;
+    border-radius: 15px;
+    background: rgba(17, 34, 64, 0.5);
+  }
+  
+  .floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(100, 255, 218, 0.1);
+    border: 2px solid var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+  }
+  
+  .element-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 15%;
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .element-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    left: 70%;
+    animation: float 5s ease-in-out infinite 1s;
+  }
+  
+  .element-3 {
+    width: 100px;
+    height: 100px;
+    top: 40%;
+    left: 40%;
+    animation: float 6s ease-in-out infinite 2s;
+  }
+  
+  .element-4 {
+    width: 70px;
+    height: 70px;
+    top: 75%;
+    left: 25%;
+    animation: float 4.5s ease-in-out infinite 0.5s;
+  }
+  
+  /* Footer */
+  footer {
+    background: var(--secondary-color);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #8892B0;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+  }
+  
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links a {
+    color: #8892B0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icons a {
+    color: #8892B0;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+  }
+  
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background: linear-gradient(135deg, #0A192F, #112240);
+    border-radius: 15px;
+    padding: 2.5rem;
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .close-modal:hover {
+    transform: rotate(90deg);
+  }
+  
+  .modal-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .modal-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+  
+  .modes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .mode-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mode-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mode-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+  
+  .mode-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+  }
+  
+  .mode-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    flex-grow: 1;
+  }
+  
+  .explore-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 8px 16px;
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .explore-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(100, 255, 218, 0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    .intro {
+      font-size: 1rem;
+    }
+    
+    .features {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .modal-content {
+      padding: 1.8rem;
+    }
+    
+    .modes-container {
+      grid-template-columns: 1fr;
+    }
+  }
+   
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #64FFDA, #00BCD4);
+    color: #0A192F;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+  }
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(100, 255, 218, 0.5);
+  }
+  .logo img {
+  height: 69px; /* Taille du logo */
+  width: auto; /* Garde les proportions */
+  display: block;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+   <img src="logo.png" alt="Site Logo">
+    <div class="logo-text">DerQCV</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="math.html">Mathematical Mode</a>
+    <a href="quantique.html">Quantum Mode</a>
+    <a href="comparaison.html">Comparison</a>
+    <a href="apropos.html">About</a>
+  </nav>
+</header>
+<main>
+  <div class="hero">
+    <h1>Welcome to Derouiche Quantum Crypto Visualizer</h1>
+    <p class="intro">
+      Discover and experiment with various classical and quantum encryption algorithms through interactive demonstrations. Learn the basics and advanced concepts to better understand information security in the digital age.
+    </p>
+    <div class="nav-buttons">
+        <button class="btn" id="startExploring">
+          <i class="fas fa-rocket"></i> Start Exploring
+        </button>
+      </div>
+  </div>
+  
+  <div class="visual-elements">
+    <div class="floating-element element-1"><i class="fas fa-shield-alt"></i></div>
+    <div class="floating-element element-2"><i class="fas fa-key"></i></div>
+    <div class="floating-element element-3"><i class="fas fa-user-secret"></i></div>
+    <div class="floating-element element-4"><i class="fas fa-code"></i></div>
+  </div>
+  
+
+  </div>
+</main>
+
+<!-- Modal -->
+<div class="modal" id="projectModal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h2 class="modal-title">Project Overview & Exploration Modes</h2>
+    <p class="modal-description">
+      The Cryptography & Cybersecurity Project is an educational platform designed to help users understand and experiment with various encryption techniques. Through interactive demonstrations and visualizations, you can explore both classical and quantum cryptography methods, compare their effectiveness, and gain insights into the future of information security.
+    </p>
+    
+    <div class="modes-container">
+      <div class="mode-card">
+        <div class="mode-icon"><i class="fas fa-calculator"></i></div>
+        <h3 class="mode-title">Mathematical Mode</h3>
+        <p class="mode-desc">Dive into classical encryption algorithms with detailed mathematical explanations and visualizations of RSA, Vigenère, Caesar cipher and more.</p>
+        <a href="math.html" class="explore-btn">Explore Mathematical Mode</a>
+      </div>
+      
+      <div class="mode-card">
+        <div class="mode-icon"><i class="fas fa-atom"></i></div>
+        <h3 class="mode-title">Quantum Mode</h3>
+        <p class="mode-desc">Explore the revolutionary field of quantum cryptography with interactive demonstrations of the BB84 protocol and quantum key distribution.</p>
+        <a href="quantique.html" class="explore-btn">Explore Quantum Mode</a>
+      </div>
+      
+      <div class="mode-card">
+        <div class="mode-icon"><i class="fas fa-balance-scale"></i></div>
+        <h3 class="mode-title">Comparison</h3>
+        <p class="mode-desc">Analyze and compare different cryptographic approaches to understand their strengths, weaknesses, and real-world applications.</p>
+        <a href="comparaison.html" class="explore-btn">Explore Comparison</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+
+    <p>&copy; 2025 Derouiche Quantum Crypto Visualizer – All rights reserved</p>
+    <div class="social-icons">
+      <a href="https://github.com/AliDerouiche" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/ali-derouiche-7a3868283" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://x.com/AliDerouiche369" title="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://monastir.academia.edu/AliDerouiche" target="_blank" title="Academia"><i class="fas fa-graduation-cap"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Animation au défilement
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.feature-card').forEach(card => {
+  observer.observe(card);
+});
+
+// Modal functionality
+const startBtn = document.getElementById('startExploring');
+const modal = document.getElementById('projectModal');
+const closeBtn = document.getElementById('closeModal');
+
+startBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  modal.style.display = 'flex';
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Close modal when clicking on any explore button
+document.querySelectorAll('.explore-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Add a small delay before closing to show the button click feedback
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 200);
+  });
+});
+</script>
+</body>
+</html>
