@@ -448,6 +448,20 @@
       flex-direction: column;
     }
   }
+     nav a.active {
+    color: var(--accent-color);
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
 </style>
 </head>
 <body>
@@ -458,10 +472,10 @@
   </div>
   <nav>
     <a href="https://aliderouiche.github.io/DerQCV/Home.html">Home</a>
-    <a href="https://aliderouiche.github.io/DerQCV/Mathematical_Mode.html">Mathematical Mode</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Mathematical_Mode.html" class="active">Mathematical Mode</a>
     <a href="https://aliderouiche.github.io/DerQCV/Quantum_Mode.html">Quantum Mode</a>
     <a href="https://aliderouiche.github.io/DerQCV/Comparison.html">Comparison</a>
-    <a href="https://aliderouiche.github.io/DerQCV/AI_Assistant.html" class="active">AI Assistant</a>
+    <a href="https://aliderouiche.github.io/DerQCV/AI_Assistant.html">AI Assistant</a>
     <a href="https://aliderouiche.github.io/DerQCV/About.html">About</a>
   </nav>
 </header>
@@ -919,6 +933,7 @@
 </body>
 
 </html>
+
 
 
 
