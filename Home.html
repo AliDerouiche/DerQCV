@@ -51,6 +51,17 @@
     50% { transform: translateY(-15px); }
     100% { transform: translateY(0px); }
   }
+
+  @keyframes modalAppear {
+    from { 
+      opacity: 0; 
+      transform: scale(0.7) translateY(-50px);
+    }
+    to { 
+      opacity: 1; 
+      transform: scale(1) translateY(0);
+    }
+  }
   
   /* Header */
   header {
@@ -108,6 +119,10 @@
     transition: color 0.3s ease;
   }
   
+  nav a.active {
+    color: var(--accent-color);
+  }
+  
   nav a::after {
     content: '';
     position: absolute;
@@ -117,6 +132,10 @@
     height: 2px;
     background: var(--accent-color);
     transition: width 0.3s ease;
+  }
+  
+  nav a.active::after {
+    width: 100%;
   }
   
   nav a:hover {
@@ -139,24 +158,28 @@
   }
   
   .hero {
-    max-width: 900px;
-    margin-bottom: 0rem;
+    max-width: 950px;
+    margin-bottom: 2rem;
   }
   
   h1 {
-    font-size: 2.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    margin-bottom: 1.8rem;
     background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.2;
+    text-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
   }
   
   .intro {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
     color: var(--text-color);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .cta-button {
@@ -331,96 +354,178 @@
     transform: translateY(-3px);
   }
   
-  /* Modal Styles */
+  /* Modal Styles - AMÉLIORÉE */
   .modal {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
     z-index: 2000;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow-y: auto;
   }
   
   .modal-content {
-    background: linear-gradient(135deg, #0A192F, #112240);
-    border-radius: 15px;
-    padding: 2.5rem;
-    max-width: 1000px;
+    background: linear-gradient(145deg, #0A192F 0%, #112240 50%, #1A2B5C 100%);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    max-width: min(90vw, 1200px);
     width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
-    border: 1px solid rgba(100, 255, 218, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.5s ease;
+    border: 2px solid rgba(100, 255, 218, 0.4);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(100, 255, 218, 0.1),
+      inset 0 1px 0 rgba(100, 255, 218, 0.1);
+    animation: modalAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center;
+  }
+  
+  /* Scrollbar personnalisée pour la modal */
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .modal-content::-webkit-scrollbar-track {
+    background: rgba(17, 34, 64, 0.3);
+    border-radius: 10px;
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+    border-radius: 10px;
   }
   
   .close-modal {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
+    top: 20px;
+    right: 25px;
+    font-size: 2.2rem;
     color: var(--accent-color);
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(100, 255, 218, 0.1);
   }
   
   .close-modal:hover {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1);
+    background: rgba(100, 255, 218, 0.2);
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
   }
   
   .modal-title {
-    font-size: 2rem;
+    font-size: 2.3rem;
     margin-bottom: 1.5rem;
     text-align: center;
     background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    text-shadow: 0 0 30px rgba(100, 255, 218, 0.2);
   }
   
   .modal-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.05rem;
+    line-height: 1.6;
     margin-bottom: 2rem;
     color: var(--text-color);
+    text-align: center;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .modes-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
     margin-top: 1.5rem;
   }
   
   .mode-card {
     background: var(--card-bg);
-    border-radius: 10px;
-    padding: 1.5rem;
+    border-radius: 15px;
+    padding: 1.8rem;
     border: 1px solid rgba(100, 255, 218, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mode-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--hover-color));
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  
+  .mode-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, rgba(0, 188, 212, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
   }
   
   .mode-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--accent-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(100, 255, 218, 0.15);
+    background: rgba(17, 34, 64, 0.95);
+  }
+
+  .mode-card:hover::before {
+    transform: translateX(0);
+  }
+
+  .mode-card:hover::after {
+    opacity: 1;
+  }
+
+  .mode-card > * {
+    position: relative;
+    z-index: 2;
   }
   
   .mode-icon {
-    font-size: 2rem;
+    font-size: 2.3rem;
     color: var(--accent-color);
     margin-bottom: 1rem;
+    text-align: center;
   }
   
   .mode-title {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
     color: var(--accent-color);
+    text-align: center;
+    font-weight: 600;
   }
   
   .mode-desc {
@@ -428,28 +533,112 @@
     line-height: 1.5;
     color: var(--text-color);
     flex-grow: 1;
+    text-align: center;
+    margin-bottom: 1.2rem;
   }
   
   .explore-btn {
     display: inline-block;
-    margin-top: 1rem;
-    padding: 8px 16px;
+    padding: 10px 20px;
     background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
     color: var(--primary-color);
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 25px;
     font-weight: 600;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     text-align: center;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  .explore-btn:hover::before {
+    left: 100%;
   }
   
   .explore-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(100, 255, 218, 0.4);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(100, 255, 218, 0.4);
   }
   
-  /* Responsive */
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  
+  .btn {
+    padding: 18px 40px;
+    background: linear-gradient(45deg, #64FFDA, #00BCD4);
+    color: #0A192F;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn:hover::before {
+    left: 100%;
+  }
+  
+  .btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.6);
+  }
+  
+  .logo img {
+    height: 69px;
+    width: auto;
+    display: block;
+  }
+  
+  /* Responsive - AMÉLIORÉ */
+  @media (max-width: 1024px) {
+    .modal-content {
+      max-width: 95vw;
+      padding: 2.5rem 2rem;
+    }
+    
+    .modal-title {
+      font-size: 2.2rem;
+    }
+    
+    .modes-container {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
   @media (max-width: 768px) {
     header {
       flex-direction: column;
@@ -480,41 +669,56 @@
     }
     
     .modal-content {
-      padding: 1.8rem;
+      padding: 2rem 1.5rem;
+      margin: 10px;
+      border-radius: 15px;
+    }
+    
+    .modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-description {
+      font-size: 1rem;
+      margin-bottom: 2rem;
     }
     
     .modes-container {
       grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    
+    .mode-card {
+      padding: 1.5rem;
+    }
+    
+    .close-modal {
+      top: 15px;
+      right: 15px;
+      font-size: 1.8rem;
+      width: 35px;
+      height: 35px;
     }
   }
-   
-  .nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-  .btn {
-    padding: 15px 30px;
-    background: linear-gradient(45deg, #64FFDA, #00BCD4);
-    color: #0A192F;
-    border: none;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
-  }
-  .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(100, 255, 218, 0.5);
-  }
-  .logo img {
-  height: 69px; /* Taille du logo */
-  width: auto; /* Garde les proportions */
-  display: block;
+
+  @media (max-width: 480px) {
+    .modal-content {
+      padding: 1.5rem 1rem;
+      max-height: 95vh;
+    }
+    
+    .modal-title {
+      font-size: 1.6rem;
+    }
+    
+    .mode-icon {
+      font-size: 2.4rem;
+    }
+    
+    .mode-title {
+      font-size: 1.2rem;
+    }
   }
 </style>
 </head>
@@ -525,10 +729,11 @@
     <div class="logo-text">DerQCV</div>
   </div>
   <nav>
-    <a href="https://aliderouiche.github.io/DerQCV/Home.html">Home</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Home.html" class="active">Home</a>
     <a href="https://aliderouiche.github.io/DerQCV/Mathematical_Mode.html">Mathematical Mode</a>
-    <a href="https://aliderouiche.github.io/DerQCV/Quantum_Mode.html">Quantum Mode</a>
+    <a href="https://aliderouiche.github.io/DerQCV/Quantum_Mode.html" >Quantum Mode</a>
     <a href="https://aliderouiche.github.io/DerQCV/Comparison.html">Comparison</a>
+    <a href="https://aliderouiche.github.io/DerQCV/AI_Assistant.html">AI Assistant</a>
     <a href="https://aliderouiche.github.io/DerQCV/About.html">About</a>
   </nav>
 </header>
@@ -650,9 +855,11 @@ document.querySelectorAll('.explore-btn').forEach(btn => {
     }, 200);
   });
 });
+
+// Prevent modal close when clicking inside modal content
+document.querySelector('.modal-content').addEventListener('click', (e) => {
+  e.stopPropagation();
+});
 </script>
 </body>
-
 </html>
-
-
