@@ -655,6 +655,20 @@
   width: auto; /* Garde les proportions */
   display: block;
   }
+    .tech-logo {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
 </style>
 </head>
@@ -853,7 +867,36 @@
       </div>
     </div>
   </section>
-
+<section class="section">
+    <div class="section-header">
+      <i class="fas fa-robot section-icon"></i>
+      <h2 class="section-title">AI Model Origin</h2>
+    </div>
+    <div class="section-content">
+      <p>
+        The DerQCV AI assistant is powered by DeepSeek R1, a cutting-edge language model accessed through 
+        the OpenRouter API. This combination provides our users with intelligent assistance for understanding 
+        complex cryptography and quantum computing concepts.
+      </p>
+      <p>
+        DeepSeek R1 offers advanced natural language processing capabilities that enable the AI assistant to 
+        explain technical topics in an accessible way, answer questions, and provide contextual information 
+        to enhance the learning experience on our platform.
+      </p>
+    <div class="tech-grid">
+     <div class="tech-item">
+        <div class="tech-logo">
+         <img src="https://www.deepseek.com/favicon.ico" alt="DeepSeek Logo">
+        </div>
+      <div class="tech-name">DeepSeek R1</div>
+     </div>
+        <div class="tech-item">
+          <div class="tech-icon"><i class="fas fa-network-wired"></i></div>
+          <div class="tech-name">OpenRouter API</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="section">
     <div class="section-header">
       <i class="fas fa-envelope section-icon"></i>
@@ -958,6 +1001,7 @@
 </body>
 
 </html>
+
 
 
 
