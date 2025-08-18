@@ -11,6 +11,24 @@
 
 
 <style>
+    nav a.active {
+    color: var(--accent-color);
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+  
+  nav a.active::after {
+    width: 100%;
+  }
   :root {
     --primary-color: #0A192F;
     --secondary-color: #112240;
@@ -652,7 +670,7 @@
     <a href="https://aliderouiche.github.io/DerQCV/Quantum_Mode.html">Quantum Mode</a>
     <a href="https://aliderouiche.github.io/DerQCV/Comparison.html">Comparison</a>
     <a href="https://aliderouiche.github.io/DerQCV/AI_Assistant.html" class="active">AI Assistant</a>
-    <a href="https://aliderouiche.github.io/DerQCV/About.html">About</a>
+    <a href="https://aliderouiche.github.io/DerQCV/About.html" class="active">About</a>
   </nav>
 </header>
 
@@ -940,5 +958,6 @@
 </body>
 
 </html>
+
 
 
