@@ -1390,7 +1390,7 @@
     fullscreenBtn.classList.toggle('active', isFullscreen);
     fullscreenBtn.querySelector('i').className = isFullscreen ? 'fas fa-compress' : 'fas fa-expand';
     fullscreenBtn.title = isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Mode';
-    
+  
     // Handle ESC key for fullscreen exit
     if (isFullscreen) {
       document.addEventListener('keydown', handleEscKey);
@@ -1862,67 +1862,47 @@ RESPONSE FORMAT GUIDELINES:
 
 Always provide educational, well-structured responses with practical examples.`;
       
-     const models = [
-  "x-ai/grok-4-fast:free",
-  "z-ai/glm-4.5-air:free",
-  "deepseek/deepseek-r1:free",
-  "qwen/qwen3-coder:free"
-];
-
-async function queryModels(systemPrompt, conversationHistory, message) {
-  const apiMessages = [
-    { role: "system", content: systemPrompt },
-    ...conversationHistory,
-    { role: "user", content: message }
-  ];
-
-  for (const model of models) {
-    try {
+   const apiMessages = [
+        { role: "system", content: systemPrompt },
+        ...conversationHistory,
+        { role: "user", content: message }
+      ];
+      
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${API_KEY}`,
-          "HTTP-Referer": "https://aliderouiche.github.io/DerQCV/Home.html",
-          "X-Title": "Derouiche Quantum Crypto Visualizer",
+          "HTTP-Referer": "https://cryptosecure.example.com",
+          "X-Title": "CryptoSecure - Quantum Crypto Visualizer",
           "Content-Type": "application/json"
-          
         },
         body: JSON.stringify({
-          model: model,
-          "provider": "together"
-          messages: apiMessages,
-          temperature: 0.7,
-          max_tokens: 2000
+          "model": "deepseek/deepseek-r1:free",
+          "messages": apiMessages,
+          "temperature": 0.7,
+          "max_tokens": 2000
         })
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(`API Error (${model}): ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+        throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
       }
-
+      
       const data = await response.json();
       const aiResponse = data.choices[0].message.content;
-
+      
       typingIndicator.style.display = 'none';
-      addMessage(`🤖 [${model}] ${aiResponse}`, 'ai');
+      addMessage(aiResponse, 'ai');
       sendButton.disabled = false;
-
+      
     } catch (error) {
-      console.error(`Error getting AI response from ${model}:`, error);
+      console.error('Error getting AI response:', error);
       typingIndicator.style.display = 'none';
-      showNotification(`Error (${model}): ${error.message}`, true);
-
-      // Afficher l'erreur comme réponse
-      const errorResponse = `⚠️ [${model}] a rencontré une erreur : ${error.message}`;
-      addMessage(errorResponse, 'ai');
-    }
-
-    // ⚠️ Petite pause pour éviter l’erreur 429 (trop de requêtes en même temps)
-    await new Promise(res => setTimeout(res, 2000));
-  }
-}
-
+      showNotification(`Error: ${error.message}`, true);
+      
+      // Add error message
+      const errorResponse = `I'm sorry, I encountered an error while processing your request. This might be due to:
 
 ### Possible Issues:
 - **API Connection**: Network connectivity problems
@@ -1976,6 +1956,7 @@ I apologize for the inconvenience! 🤖`;
 </body>
 
 </html>
+
 
 
 
