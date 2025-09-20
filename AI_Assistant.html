@@ -1862,47 +1862,51 @@ RESPONSE FORMAT GUIDELINES:
 
 Always provide educational, well-structured responses with practical examples.`;
       
-   const apiMessages = [
-        { role: "system", content: systemPrompt },
-        ...conversationHistory,
-        { role: "user", content: message }
-      ];
-      
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${API_KEY}`,
-          "HTTP-Referer": "https://cryptosecure.example.com",
-          "X-Title": "CryptoSecure - Quantum Crypto Visualizer",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "model": "x-ai/grok-4-fast:free",
-          "messages": apiMessages,
-          "temperature": 0.7,
-          "max_tokens": 2000
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-      }
-      
-      const data = await response.json();
-      const aiResponse = data.choices[0].message.content;
-      
-      typingIndicator.style.display = 'none';
-      addMessage(aiResponse, 'ai');
-      sendButton.disabled = false;
-      
-    } catch (error) {
-      console.error('Error getting AI response:', error);
-      typingIndicator.style.display = 'none';
-      showNotification(`Error: ${error.message}`, true);
-      
-      // Add error message
-      const errorResponse = `I'm sorry, I encountered an error while processing your request. This might be due to:
+  const apiMessages = [
+  { role: "system", content: systemPrompt },
+  ...conversationHistory,
+  { role: "user", content: message }
+];
+
+try {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${API_KEY}`,
+      "HTTP-Referer": "https://cryptosecure.example.com",
+      "X-Title": "CryptoSecure - Quantum Crypto Visualizer",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "x-ai/grok-4-fast:free",
+      provider: "xai",   // 👈 ici on force le provider
+      messages: apiMessages,
+      temperature: 0.7,
+      max_tokens: 2000
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+  }
+
+  const data = await response.json();
+  const aiResponse = data.choices[0].message.content;
+
+  typingIndicator.style.display = 'none';
+  addMessage(aiResponse, 'ai');
+  sendButton.disabled = false;
+
+} catch (error) {
+  console.error('Error getting AI response:', error);
+  typingIndicator.style.display = 'none';
+  showNotification(`Error: ${error.message}`, true);
+
+  const errorResponse = `⚠️ I'm sorry, I encountered an error while processing your request.\n\nThis might be due to:\n- Rate limits (429)\n- Provider restrictions (404)\n- Model not available in :free version\n- Network/API issues`;
+  addMessage(errorResponse, 'ai');
+}
+
 
 ### Possible Issues:
 - **API Connection**: Network connectivity problems
@@ -1956,6 +1960,7 @@ I apologize for the inconvenience! 🤖`;
 </body>
 
 </html>
+
 
 
 
