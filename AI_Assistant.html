@@ -33,7 +33,7 @@
     --code-bg: #2d2d2d;
     --code-border: #3e3e3e;
   }
-  
+   
   * {
     margin: 0;
     padding: 0;
@@ -1878,7 +1878,11 @@ Always provide educational, well-structured responses with practical examples.`;
         },
         body: JSON.stringify({
           "model": "deepseek/deepseek-r1:free",
-          "provider": "together"
+          'provider': {
+      'order': [
+        'openai',
+        'together'
+      ]
           "messages": apiMessages,
           "temperature": 0.7,
           "max_tokens": 2000
@@ -1957,6 +1961,7 @@ I apologize for the inconvenience! 🤖`;
 </body>
 
 </html>
+
 
 
 
